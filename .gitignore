@@ -1,0 +1,8 @@
+.cache
+.config
+.openvscode-server
+.bash_history
+.local
+.npm
+
+node_modules

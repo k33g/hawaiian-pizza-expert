@@ -1,0 +1,9 @@
+{
+  "name": "first-steps-with-docker-model-runner",
+  "type": "module",
+  "dependencies": {
+    "@langchain/openai": "^0.4.7",
+    "langchain": "^0.3.12",
+    "prompts": "^2.4.2"
+  }
+}

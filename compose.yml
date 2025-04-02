@@ -1,0 +1,45 @@
+services:
+  genai-ide:
+    build:
+      context: .
+      dockerfile: ide.Dockerfile
+      args:
+        - GO_VERSION=${GO_VERSION} 
+        - NODE_MAJOR=${NODE_MAJOR}
+        - USER_NAME=${USER_NAME}  
+        - BUILDPLATFORM=${BUILDPLATFORM:-linux/arm64}  
+    image: k33g/genai-ide:experimental
+    ports:
+      - 3500:3000
+      - 8501:8501
+      - 8502:8502
+    environment:
+      - MODEL_RUNNER_BASE_URL=${MODEL_RUNNER_BASE_URL}
+    volumes:
+      #- ./workspace:/home/workspace:cached
+      - ./:/home/workspace:cached
+    init: true
+    restart: unless-stopped
+    depends_on:
+      download-local-llms:
+        condition: service_completed_successfully
+
+    post_start:
+      - command: |
+          /home/.openvscode-server/bin/openvscode-server --install-extension golang.go
+          /home/.openvscode-server/bin/openvscode-server --install-extension aaron-bond.better-comments
+          /home/.openvscode-server/bin/openvscode-server --install-extension pkief.material-icon-theme
+          /home/.openvscode-server/bin/openvscode-server --install-extension pkief.material-product-icons
+          /home/.openvscode-server/bin/openvscode-server --install-extension Catppuccin.catppuccin-vsc
+
+  download-local-llms:
+    image: curlimages/curl:8.12.1
+    environment:
+      - MODEL_RUNNER_BASE_URL=${MODEL_RUNNER_BASE_URL}
+    volumes:
+      - ./download-models.sh:/download-models.sh
+    entrypoint:
+      - "sh"
+      - "/download-models.sh"
+
+          

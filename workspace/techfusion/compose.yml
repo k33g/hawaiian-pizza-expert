@@ -1,0 +1,29 @@
+services:
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    environment:
+      - MODEL_RUNNER_URL=http://model-runner.docker.internal/engines/llama.cpp/v1/
+      - LLM=ai/llama3.2
+    develop:
+      watch:
+        - action: rebuild
+          path: ./backend/server.js
+
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - 8501:8501
+    environment:
+      - BACKEND_SERVICE_URL=http://backend:5050
+    depends_on:
+      - backend
+    develop:
+      watch:
+        - action: rebuild
+          path: ./frontend/app.py
