@@ -1,15 +1,15 @@
 {
     "workbench.iconTheme": "material-icon-theme",
-    "workbench.colorTheme": "GitHub Light Monochrome Focused",
-    "editor.fontSize": 14,
-    "terminal.integrated.fontSize": 14,
+    "workbench.colorTheme": "Catppuccin Mocha",
+    "editor.fontSize": 16,
+    "terminal.integrated.fontSize": 16,
     "editor.insertSpaces": true,
     "editor.tabSize": 4,
     "editor.detectIndentation": true,
     "files.autoSave": "afterDelay",
     "files.autoSaveDelay": 1000,
     "workbench.tree.indent": 20,
-    "window.zoomLevel": 0.0,
+    "window.zoomLevel": 0.5,
     "[markdown]": {
         "editor.unicodeHighlight.ambiguousCharacters": false,
         "editor.unicodeHighlight.invisibleCharacters": false,
@@ -26,17 +26,7 @@
     },
     "markdown.preview.fontSize": 14,
     "workbench.editorAssociations": {
-        "*.md": "vscode.markdown.preview.editor"
-    },
-    "[dockerfile]": {
-        "editor.fontSize": 16,
-    },
-    "[dockercompose]": {
-        "editor.fontSize": 16,
-    },
-    "[python]": {
-        "editor.fontSize": 16,
-
+        //"*.md": "vscode.markdown.preview.editor"
     },
     "[json]": {
         "editor.fontSize": 16,
@@ -44,10 +34,8 @@
     },
     "[yaml]": {
         "editor.fontSize": 16,
-
     },
     "[go]": {
         "editor.fontSize": 16,
-    },
-    "python.defaultInterpreterPath": "~/.venv/bin/python"
+    }
 }
