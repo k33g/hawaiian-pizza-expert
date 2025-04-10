@@ -8,8 +8,8 @@ PAGE_HEADER = os.environ.get('PAGE_HEADER', 'Made with Streamlit and LangChainJS
 
 PAGE_ICON = os.environ.get('PAGE_ICON', '🚀')
 
-LLM_CHAT= os.environ.get('LLM_CHAT', '')
-LLM_EMBEDDINGS= os.environ.get('LLM_EMBEDDINGS', '')
+LLM_CHAT= os.environ.get('CHAT_MODEL', '')
+LLM_EMBEDDINGS= os.environ.get('EMBEDDINGS_MODEL', '')
 
 # Configuration of the Streamlit page
 st.set_page_config(page_title=PAGE_TITLE, page_icon=PAGE_ICON)

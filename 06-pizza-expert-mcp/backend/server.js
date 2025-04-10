@@ -65,17 +65,16 @@ let langchainTools = transformToLangchainTools(mcpTools);
 // ---[END][Model Context Protocol]-------
 
 
-let modelBaseURL = process.env.MODEL_RUNNER_BASE_URL
+let modelRunnerURL = process.env.CHAT_URL
 
-let engineEndPoint = "/engines/llama.cpp/v1/"
 
 // Create the Model Runner Client for Chat
 const llm = new ChatOpenAI({
-  //model: process.env.LLM_CHAT || "ai/llama3.2",
-  model: process.env.LLM_CHAT,
+  //model: process.env.CHAT_MODEL || "ai/llama3.2",
+  model: process.env.CHAT_MODEL,
   apiKey: "",
   configuration: {
-    baseURL: modelBaseURL + engineEndPoint,
+    baseURL: modelRunnerURL,
   },  
   temperature: parseFloat(process.env.OPTION_TEMPERATURE) || 0.0,
   repeat_last_n: parseInt(process.env.OPTION_REPEAT_LAST_N) || 2,
@@ -87,9 +86,9 @@ const llm = new ChatOpenAI({
 
 // Create the Model Runner Client for Embeddings
 const llmEmbeddings = new OpenAIEmbeddings({
-    model: process.env.LLM_EMBEDDINGS,
+    model: process.env.EMBEDDINGS_MODEL,
     configuration: {
-        baseURL: modelBaseURL + engineEndPoint,
+        baseURL: modelRunnerURL,
         apiKey: "sk-no-key-required"
     }
 })
