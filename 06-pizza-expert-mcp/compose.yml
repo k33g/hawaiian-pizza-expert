@@ -18,9 +18,6 @@ services:
     ports:
       - 5050:5050
     environment:
-      - MODEL_RUNNER_BASE_URL=${MODEL_RUNNER_BASE_URL}
-      - LLM_CHAT=${LLM_CHAT}
-      - LLM_EMBEDDINGS=${LLM_EMBEDDINGS}
       - HISTORY_MESSAGES=${HISTORY_MESSAGES}
       - OPTION_TEMPERATURE=${OPTION_TEMPERATURE}
       - OPTION_REPEAT_LAST_N=${OPTION_REPEAT_LAST_N}
@@ -40,6 +37,8 @@ services:
     #    condition: service_completed_successfully
     depends_on:
       - mcp-server
+      - embeddings
+      - chat
 
   frontend:
     build:
@@ -52,10 +51,10 @@ services:
       - PAGE_TITLE=${PAGE_TITLE}
       - PAGE_HEADER=${PAGE_HEADER}
       - PAGE_ICON=${PAGE_ICON}
-      - LLM_CHAT=${LLM_CHAT}
-      - LLM_EMBEDDINGS=${LLM_EMBEDDINGS}
     depends_on:
       - backend
+      - embeddings
+      - chat
     #develop:
     #  watch:
     #    - action: rebuild
@@ -74,3 +73,15 @@ services:
       - 3001:3001
     volumes:
       - ./plugins:/app/plugins
+
+  embeddings:
+    provider:
+      type: model
+      options:
+        model: ${LLM_EMBEDDINGS}
+
+  chat:
+    provider:
+      type: model
+      options:
+        model: ${LLM_CHAT}
