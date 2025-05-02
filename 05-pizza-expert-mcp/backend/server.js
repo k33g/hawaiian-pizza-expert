@@ -14,7 +14,9 @@ import { fetchTools, transformToLangchainTools } from "./mcp.helpers.js"
 
 //! MCP
 import { Client } from "@modelcontextprotocol/sdk/client/index.js";
-import { SSEClientTransport } from "@modelcontextprotocol/sdk/client/sse.js";
+//import { SSEClientTransport } from "@modelcontextprotocol/sdk/client/sse.js";
+import { StreamableHTTPClientTransport } from "@modelcontextprotocol/sdk/client/streamableHttp.js";
+
 
 // ---[BEGIN][Model Context Protocol]-------
 
@@ -25,7 +27,7 @@ import { SSEClientTransport } from "@modelcontextprotocol/sdk/client/sse.js";
 const bearerToken = process.env.BEARER_TOKEN;
 
 // Set up the SSE client transport (with auth headers)
-const transport = new SSEClientTransport(new URL(`${process.env.MCP_SERVER_BASE_URL}/sse`), {
+const transport = new StreamableHTTPClientTransport(new URL(`${process.env.MCP_SERVER_BASE_URL}/mcp`), {
   authProvider: {
     tokens: async () => {
       return {
