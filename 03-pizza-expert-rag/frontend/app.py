@@ -8,8 +8,8 @@ PAGE_HEADER = os.environ.get('PAGE_HEADER', 'Made with Streamlit and LangChainJS
 
 PAGE_ICON = os.environ.get('PAGE_ICON', '🚀')
 
-LLM_CHAT= os.environ.get('LLM_CHAT', '')
-LLM_EMBEDDINGS= os.environ.get('LLM_EMBEDDINGS', '')
+CHAT_MODEL= os.environ.get('CHAT_MODEL', '')
+EMBEDDINGS_MODEL= os.environ.get('EMBEDDINGS_MODEL', '')
 
 # Configuration of the Streamlit page
 st.set_page_config(page_title=PAGE_TITLE, page_icon=PAGE_ICON)
@@ -147,7 +147,7 @@ st.session_state.session_id = session_id
 
 # Form to send a message
 with st.form(key=f"message_form_{st.session_state.input_key}"):
-    message = st.text_area(f"📝 Your message: [📕 {LLM_CHAT} 🌐 {LLM_EMBEDDINGS}]", key=f"input_{st.session_state.input_key}", height=150)
+    message = st.text_area(f"📝 Your message: [📕 {CHAT_MODEL} 🌐 {EMBEDDINGS_MODEL}]", key=f"input_{st.session_state.input_key}", height=150)
     col1, col2, col3 = st.columns([1, 1, 3])
     with col1:
         submit_button = st.form_submit_button(label="Send...")
